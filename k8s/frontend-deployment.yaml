@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: parts-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: parts-frontend
+  template:
+    metadata:
+      labels:
+        app: parts-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: ghcr.io/bcbeco/parts-frontend:latest
+        ports:
+        - containerPort: 80
