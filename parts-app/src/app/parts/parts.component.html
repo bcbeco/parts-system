@@ -1,0 +1,38 @@
+<div class="container mt-4">
+
+  <h2 class="mb-3">Alkatrész nyilvántartó</h2>
+
+  <!-- FORM -->
+  <div class="card p-3 mb-4">
+    <input class="form-control mb-2" placeholder="Név" [(ngModel)]="newPart.name">
+    <input class="form-control mb-2" placeholder="Serial" [(ngModel)]="newPart.serialNumber">
+    <input class="form-control mb-2" type="number" placeholder="Ár" [(ngModel)]="newPart.price">
+    <input class="form-control mb-2" placeholder="Megjegyzés" [(ngModel)]="newPart.note">
+
+    <button class="btn btn-primary" (click)="addPart()">
+      Hozzáadás
+    </button>
+  </div>
+
+  <!-- LISTA -->
+  <div class="card p-3">
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between"
+          *ngFor="let p of parts">
+
+        <div>
+          <b>{{p.name}}</b> - {{p.price}} Ft
+          <br>
+          <small>{{p.serialNumber}}</small>
+        </div>
+
+        <button class="btn btn-danger btn-sm"
+                (click)="deletePart(p.id)">
+          Törlés
+        </button>
+
+      </li>
+    </ul>
+  </div>
+
+</div>
