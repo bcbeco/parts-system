@@ -7,12 +7,14 @@ public class PartService
 {
     private readonly IMongoCollection<Part> _collection;
 
-    public PartService(IConfiguration config)
-    {
-        var client = new MongoClient(config["Mongo:Connection"]);
-        var database = client.GetDatabase(config["Mongo:Database"]);
-        _collection = database.GetCollection<Part>(config["Mongo:Collection"]);
-    }
+   public PartService(IConfiguration config)
+{
+    var settings = config.GetSection("MongoSettings");
+
+    var client = new MongoClient(settings["Connection"]);
+    var database = client.GetDatabase(settings["Database"]);
+    _collection = database.GetCollection<Part>(settings["Collection"]);
+}
 
     public async Task<List<Part>> GetAsync() =>
         await _collection.Find(_ => true).ToListAsync();
